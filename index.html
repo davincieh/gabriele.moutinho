@@ -44,6 +44,7 @@
 }
 </script>
 
+<!-- TRACKING -->
 <script>
 window.TRACK = {
   ga4:        "",
@@ -79,6 +80,9 @@ window.TRACK = {
 </script>
 
 <style>
+/* =========================================================
+   DESIGN SYSTEM — Drª Gabriele Moutinho
+   ========================================================= */
 :root{
   --creme:#FAEEE4; --creme-2:#F4E5D8; --nude:#E5CBB8; --nude-forte:#D9B39C;
   --bronze:#A9754E; --bronze-700:#8A5836; --ouro:#DBA36B; --ouro-claro:#EBC79B;
@@ -162,11 +166,13 @@ em{font-style:italic;color:var(--bronze)}
 .marca{display:flex;align-items:center;text-decoration:none;flex:none}
 .marca img{width:auto;height:52px;display:block;transition:height .35s}
 .topo.fixo .marca img{height:42px}
+
 .nav{display:flex;align-items:center;gap:var(--e6)}
 .nav a{text-decoration:none;font-size:0.99rem;position:relative;padding-block:6px;color:var(--tinta)}
 .nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--bronze);transition:width .3s var(--mola)}
 .nav a:hover::after{width:100%}
-.topo .btn{min-height:46px;padding-inline:var(--e5);font-size:0.95rem}
+.nav-voltar{display:none}
+
 .menu-btn{display:none;background:none;border:1px solid var(--nude-forte);color:var(--tinta);border-radius:var(--r-btn);min-width:48px;min-height:48px;align-items:center;justify-content:center;cursor:pointer}
 
 /* ===================== HERO ===================== */
@@ -182,20 +188,6 @@ em{font-style:italic;color:var(--bronze)}
 .hero-provas i{width:5px;height:5px;border-radius:50%;background:var(--bronze);flex:none}
 .hero-foto{position:relative;margin:0 auto;max-width:480px;width:100%}
 .hero-foto img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:center;border-radius:var(--moldura);background:var(--nude);border:1px solid rgba(169,117,78,.3)}
-@media (max-width:880px){
-  .hero-in{grid-template-columns:1fr;gap:var(--e6)}
-  .hero-foto{max-width:380px;margin-inline:auto}
-}
-@media (max-width:560px){
-  :root{--moldura:18px}
-  .hero{padding-block:90px var(--secao)}
-  .hero-foto{max-width:min(320px,85vw)}
-  .local-foto{max-width:min(320px,85vw)}
-  .hero-acoes{gap:var(--e3);flex-direction:column}
-  .hero-acoes .btn{width:100%}
-  .hero-provas{margin-top:var(--e5);padding-top:var(--e4)}
-  .hero-provas ul{gap:var(--e2) var(--e4)}
-}
 
 /* ===================== SOBRE (curto) ===================== */
 .sobre-grade{max-width:56ch;margin-inline:auto;text-align:center}
@@ -331,6 +323,14 @@ em{font-style:italic;color:var(--bronze)}
 .faq details[open] .faq-mais{transform:rotate(180deg)}
 .faq-resposta{padding-bottom:var(--e6);max-width:70ch;color:var(--tinta-fraca)}
 
+/* ===================== CTA ===================== */
+.cta{text-align:center}
+.cta-in{display:grid;justify-items:center;gap:var(--e5)}
+.cta h2{max-width:17ch;text-wrap:balance}
+.cta .lead{text-align:center;margin-inline:auto}
+.cta .eyebrow::before{display:none}
+.cta .orn{margin-inline:auto}
+
 /* ===================== RODAPÉ ===================== */
 .rodape{background:var(--cafe);color:#C4AA97;padding-block:var(--e8) var(--e6);position:relative}
 .rodape-grade{display:grid;grid-template-columns:1.5fr 1fr 1.1fr;gap:var(--e7)}
@@ -348,57 +348,92 @@ em{font-style:italic;color:var(--bronze)}
 .zap{position:fixed;right:clamp(16px,4vw,28px);bottom:clamp(16px,4vw,28px);z-index:90;width:58px;height:58px;border-radius:50%;background:var(--bronze-700);color:var(--creme);display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 14px 34px -12px rgba(42,22,16,.75);transition:transform .3s var(--mola),background-color .25s}
 .zap:hover{transform:scale(1.08);background:#734527}
 
-/* ===================== ANIMAÇÃO ===================== */
+/* ===================== ANIMAÇÃO DE REVELAÇÃO ===================== */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--mola),transform .8s var(--mola)}
 .rv.on{opacity:1;transform:none}
 
-/* ===================== MOBILE & MENU FIX ===================== */
+/* ===================== MOBILE & MENU OVERLAY ===================== */
+@media (max-width:880px){
+  .hero-in{grid-template-columns:1fr;gap:var(--e6)}
+  .hero-foto{max-width:380px;margin-inline:auto}
+  .local-grade{grid-template-columns:1fr}
+  .kit-grade{grid-template-columns:1fr}
+}
+
+@media (max-width:560px){
+  :root{--moldura:18px}
+  .hero{padding-block:90px var(--secao)}
+  .hero-foto{max-width:min(320px,85vw)}
+  .local-foto{max-width:min(320px,85vw)}
+  .hero-acoes{gap:var(--e3);flex-direction:column}
+  .hero-acoes .btn{width:100%}
+  .hero-provas{margin-top:var(--e5);padding-top:var(--e4)}
+  .hero-provas ul{gap:var(--e2) var(--e4)}
+}
+
 @media (max-width:900px){
   .marca img{height:44px}
   .topo.fixo .marca img{height:38px}
-  .rodape-logo{height:60px}
-  
-  /* Menu corrigido cobrindo a tela com segurança e flexbox correto */
+  .menu-btn{display:inline-flex}
+
   .nav{
     position:fixed;
-    inset:0;
+    top:0;
+    left:0;
     width:100vw;
     height:100vh;
     height:100dvh;
+    background:#FAEEE4;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    background:rgba(250,238,228,.98);
-    gap:var(--e5);
+    gap:24px;
+    z-index:9999;
+    padding:32px 24px;
     transform:translateX(100%);
-    transition:transform .4s var(--mola);
-    z-index:999;
-    padding:var(--e7) var(--e5);
+    transition:transform .35s var(--mola), opacity .3s, visibility .3s;
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
     overflow-y:auto;
   }
-  .nav[data-aberto="true"]{transform:none}
-  .nav a{font-family:var(--display);font-size:1.5rem;text-align:center}
-  .nav .btn{min-height:50px;width:100%;max-width:280px}
-  
-  /* Botão de voltar/fechar dentro do menu mobile */
-  .nav-voltar {
-    display: inline-flex !important;
-    align-items: center;
-    gap: 8px;
-    background: none;
-    border: 1.5px solid var(--bronze-700);
-    color: var(--tinta);
-    padding: 10px 20px;
-    border-radius: var(--r-btn);
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    margin-bottom: var(--e3);
+
+  .nav[data-aberto="true"]{
+    transform:translateX(0);
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
   }
-  .menu-btn{display:inline-flex;position:relative;z-index:1000}
-}
-@media (min-width:901px){
-  .nav-voltar { display: none !important; }
+
+  .nav a{
+    font-family:var(--display);
+    font-size:1.45rem;
+    color:var(--tinta);
+    text-align:center;
+  }
+
+  .nav .btn{
+    width:100%;
+    max-width:280px;
+    min-height:50px;
+    font-size:1.05rem;
+  }
+
+  .nav-voltar{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:transparent;
+    border:1.5px solid var(--bronze-700);
+    color:var(--bronze-700);
+    padding:10px 24px;
+    border-radius:var(--r-btn);
+    font-weight:600;
+    font-size:0.95rem;
+    cursor:pointer;
+    margin-bottom:12px;
+  }
 }
 </style>
 </head>
@@ -414,7 +449,6 @@ em{font-style:italic;color:var(--bronze)}
     </a>
 
     <nav class="nav" id="nav" aria-label="Navegação principal">
-      <!-- Botão de voltar/fechar dentro do menu mobile -->
       <button type="button" class="nav-voltar" id="nav-voltar" aria-label="Voltar para a página">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         Voltar
@@ -429,9 +463,8 @@ em{font-style:italic;color:var(--bronze)}
       <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M0 1h22M0 8h22M0 15h22" stroke="currentColor" stroke-width="1.6"/></svg>
     </button>
   </div>
-</main>
+</header>
 
-<!-- ==================== CONTEÚDO COMPLETO ==================== -->
 <main id="conteudo">
 
 <!-- ==================== HERO ==================== -->
@@ -810,55 +843,89 @@ em{font-style:italic;color:var(--bronze)}
   <svg width="27" height="27" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.15h-.01a8.2 8.2 0 01-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
 </a>
 
+<!-- SCRIPT DE NAVEGAÇÃO E ANIMAÇÕES -->
 <script>
 (function(){
   "use strict";
-  var topo=document.getElementById('topo');
-  function s(){topo.classList.toggle('fixo',window.scrollY>40);} s();
-  window.addEventListener('scroll',s,{passive:true});
 
-  var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav'), voltarBtn=document.getElementById('nav-voltar');
-  function fechar(){
+  // Cabeçalho fixo no scroll
+  var topo = document.getElementById('topo');
+  function s(){ if(topo) topo.classList.toggle('fixo', window.scrollY > 40); }
+  s();
+  window.addEventListener('scroll', s, {passive: true});
+
+  // Controle do Menu Mobile
+  var btn = document.getElementById('menu-btn'), 
+      nav = document.getElementById('nav'), 
+      voltarBtn = document.getElementById('nav-voltar');
+
+  function fecharMenu(){
+    if(!nav) return;
     nav.removeAttribute('data-aberto');
-    btn.setAttribute('aria-expanded','false');
-    btn.setAttribute('aria-label','Abrir menu');
-    document.body.style.overflow='';
+    if(btn) {
+      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-label','Abrir menu');
+    }
+    document.body.style.overflow = '';
   }
-  
-  btn.addEventListener('click',function(){
-    if(nav.getAttribute('data-aberto')==='true'){
-      fechar();
-    }else{
-      nav.setAttribute('data-aberto','true');
+
+  function abrirMenu(){
+    if(!nav) return;
+    nav.setAttribute('data-aberto','true');
+    if(btn) {
       btn.setAttribute('aria-expanded','true');
       btn.setAttribute('aria-label','Fechar menu');
-      document.body.style.overflow='hidden';
     }
-  });
+    document.body.style.overflow = 'hidden';
+  }
+
+  if(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(nav.getAttribute('data-aberto') === 'true'){
+        fecharMenu();
+      } else {
+        abrirMenu();
+      }
+    });
+  }
 
   if(voltarBtn){
-    voltarBtn.addEventListener('click', fechar);
+    voltarBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      fecharMenu();
+    });
   }
 
-  nav.addEventListener('click',function(e){if(e.target.closest('a'))fechar();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')fechar();});
+  if(nav){
+    nav.addEventListener('click', function(e){
+      if(e.target.closest('a')){
+        fecharMenu();
+      }
+    });
+  }
 
-  var alvos=document.querySelectorAll('.rv');
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){
-    alvos.forEach(function(el){el.classList.add('on');});
-  }else{
-    var obs=new IntersectionObserver(function(en){
-      en.forEach(function(e){
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') fecharMenu();
+  });
+
+  // Animações de Revelação no Scroll (com Fallback Seguro)
+  var alvos = document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    alvos.forEach(function(el){ el.classList.add('on'); });
+  } else {
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
         if(e.isIntersecting){
-          var i=Array.prototype.indexOf.call(e.target.parentNode.children,e.target);
-          e.target.style.transitionDelay=Math.min(i,5)*70+'ms';
-          e.target.classList.add('on'); obs.unobserve(e.target);
+          e.target.classList.add('on');
+          obs.unobserve(e.target);
         }
       });
-    },{threshold:.1,rootMargin:'0px 0px -8% 0px'});
-    alvos.forEach(function(el){obs.observe(el);});
+    }, {threshold: 0.05, rootMargin: '0px 0px 50px 0px'});
+    alvos.forEach(function(el){ obs.observe(el); });
   }
 
+  // Rastreamento de conversões
   var T = window.TRACK || {};
   document.addEventListener('click', function(ev){
     var a = ev.target.closest('[data-conv]');
@@ -878,19 +945,7 @@ em{font-style:italic;color:var(--bronze)}
     }
   }, true);
 
-  var sec = document.getElementById('planos');
-  if (sec && 'IntersectionObserver' in window) {
-    var vo = new IntersectionObserver(function(e){
-      if(e[0].isIntersecting){
-        if (window.gtag) gtag('event', 'viu_planos');
-        if (window.fbq)  fbq('trackCustom', 'ViuPlanos');
-        vo.disconnect();
-      }
-    }, {threshold:.3});
-    vo.observe(sec);
-  }
-
-  /* ---------- Janela "O que está incluso" ---------- */
+  // Modal "O que está incluso"
   var modal   = document.getElementById('modal-plano');
   var mDur    = document.getElementById('modal-dur');
   var mTit    = document.getElementById('modal-titulo');
@@ -909,18 +964,20 @@ em{font-style:italic;color:var(--bronze)}
     var lista = card.querySelector('.plano-tudo');
     var cta   = card.querySelector('a[data-conv="whatsapp"]');
 
-    mDur.textContent   = dur ? dur.textContent.trim() : '';
-    mTit.textContent   = tit ? tit.textContent.trim() : '';
-    mPreco.textContent = preco ? preco.textContent.replace(/\s+/g,' ').trim() : '';
+    if(mDur) mDur.textContent = dur ? dur.textContent.trim() : '';
+    if(mTit) mTit.textContent = tit ? tit.textContent.trim() : '';
+    if(mPreco) mPreco.textContent = preco ? preco.textContent.replace(/\s+/g,' ').trim() : '';
 
-    mLista.innerHTML = '';
-    if(lista){
-      var copia = lista.cloneNode(true);
-      copia.removeAttribute('hidden');
-      mLista.appendChild(copia);
+    if(mLista){
+      mLista.innerHTML = '';
+      if(lista){
+        var copia = lista.cloneNode(true);
+        copia.removeAttribute('hidden');
+        mLista.appendChild(copia);
+      }
     }
 
-    if(cta){
+    if(cta && mCta){
       mCta.setAttribute('href', cta.getAttribute('href'));
       mCta.setAttribute('data-conv','whatsapp');
       mCta.setAttribute('data-plano', cta.getAttribute('data-plano') || '');
@@ -932,7 +989,7 @@ em{font-style:italic;color:var(--bronze)}
     if(typeof modal.showModal === 'function'){ modal.showModal(); }
     else { modal.setAttribute('open',''); }
     document.body.style.overflow = 'hidden';
-    mLista.scrollTop = 0;
+    if(mLista) mLista.scrollTop = 0;
   }
 
   function fecharPlano(){
@@ -947,8 +1004,8 @@ em{font-style:italic;color:var(--bronze)}
     b.addEventListener('click', function(){ abrirPlano(b); });
   });
 
-  var fecharModal = document.getElementById('modal-fechar');
-  if(fecharModal) fecharModal.addEventListener('click', fecharPlano);
+  var fecharModalBtn = document.getElementById('modal-fechar');
+  if(fecharModalBtn) fecharModalBtn.addEventListener('click', fecharPlano);
   if(modal){
     modal.addEventListener('cancel', function(){ document.body.style.overflow=''; });
     modal.addEventListener('close',  function(){ document.body.style.overflow=''; });

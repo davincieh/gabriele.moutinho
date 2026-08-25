@@ -44,7 +44,6 @@
 }
 </script>
 
-<!-- TRACKING -->
 <script>
 window.TRACK = {
   ga4:        "",
@@ -80,9 +79,6 @@ window.TRACK = {
 </script>
 
 <style>
-/* =========================================================
-   DESIGN SYSTEM — Drª Gabriele Moutinho
-   ========================================================= */
 :root{
   --creme:#FAEEE4; --creme-2:#F4E5D8; --nude:#E5CBB8; --nude-forte:#D9B39C;
   --bronze:#A9754E; --bronze-700:#8A5836; --ouro:#DBA36B; --ouro-claro:#EBC79B;
@@ -717,12 +713,12 @@ em{font-style:italic;color:var(--bronze)}
 
       <div class="rv">
        <ul class="kit-numeros" id="kit-numeros">
-          <li data-ig="seguidores"  data-fallback="5633"><b>—</b><span>Seguidores<br>no Instagram</span></li>
-          <li data-ig="alcance28d"  data-fallback="97300"><b>—</b><span>Contas alcançadas<br>nos últimos 28 dias</span></li>
-          <li data-ig="stories"     data-fallback="2500"><b>—</b><span>Visualizações médias<br>por dia nos Stories</span></li>
+          <li data-ig="seguidores"  data-fallback="5.6k"><b>5.6k+</b><span>Seguidores<br>no Instagram</span></li>
+          <li data-ig="alcance28d"  data-fallback="97.3k"><b>97k+</b><span>Contas alcançadas<br>nos últimos 28 dias</span></li>
+          <li data-ig="stories"     data-fallback="2.5k"><b>2.5k+</b><span>Visualizações médias<br>por dia nos Stories</span></li>
           <li data-ig="fixo"><b>Barra da Tijuca</b><span>Consultório próprio<br>no Rio de Janeiro</span></li>
         </ul>
-        <p class="kit-live" id="kit-live"><i aria-hidden="true"></i><span id="kit-live-txt">Números atualizados manualmente</span></p>
+        <p class="kit-live" id="kit-live"><i aria-hidden="true"></i><span id="kit-live-txt">Números atualizados</span></p>
 
         <ul class="kit-tags">
           <li>Nutrição</li>
@@ -909,7 +905,7 @@ em{font-style:italic;color:var(--bronze)}
     if(e.key === 'Escape') fecharMenu();
   });
 
-  // Animações de Revelação no Scroll (com Fallback Seguro)
+  // Animações de Revelação no Scroll
   var alvos = document.querySelectorAll('.rv');
   if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     alvos.forEach(function(el){ el.classList.add('on'); });
@@ -924,6 +920,12 @@ em{font-style:italic;color:var(--bronze)}
     }, {threshold: 0.05, rootMargin: '0px 0px 50px 0px'});
     alvos.forEach(function(el){ obs.observe(el); });
   }
+
+  // Preenchimento automático dos números do Mídia Kit
+  document.querySelectorAll('#kit-numeros li[data-fallback]').forEach(function(li){
+    var b = li.querySelector('b');
+    if(b) b.textContent = li.getAttribute('data-fallback');
+  });
 
   // Rastreamento de conversões
   var T = window.TRACK || {};

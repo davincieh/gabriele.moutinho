@@ -219,8 +219,16 @@ em{font-style:italic;color:var(--bronze)}
   color:var(--ouro);display:inline-flex;align-items:center;gap:var(--e2);min-height:44px;
   text-align:left;transition:color .2s;
 }
-/* Seta apontando para baixo alterada conforme solicitado */
-.plano-mais::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(0px)}
+/* Correção definitiva da seta apontando para baixo */
+.plano-mais::after{
+  content:"";
+  width:8px;
+  height:8px;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(45deg);
+  margin-bottom: 4px; /* Ajuste para centralizar visualmente com o texto */
+}
 .plano-mais:hover{color:var(--ouro-claro)}
 .plano-tudo{list-style:none;margin:0;padding:0;display:grid;gap:var(--e3);font-size:1rem;color:#CDB5A3;line-height:1.55}
 .plano-tudo[hidden]{display:none}

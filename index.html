@@ -338,12 +338,15 @@ em{font-style:italic;color:var(--bronze)}
   text-align: left;
   letter-spacing: -0.02em; /* Aproxima as letras de forma sutil */
 }
-/* Quando a tela for maior que 880px (Computadores), muda para justificado */
+/* Quando a tela for grande (PC) */
 @media (min-width: 881px) {
   .hero-texto {
     text-align: justify;
     text-justify: inter-word;
-    hyphens: none;
+    
+    /* Reativa os hifens apenas no computador para evitar os buracos */
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 }
 /* ===================== MÍDIA KIT / MARCAS ===================== */

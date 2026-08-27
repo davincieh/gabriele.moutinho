@@ -334,31 +334,11 @@ em{font-style:italic;color:var(--bronze)}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--mola),transform .8s var(--mola)}
 .rv.on{opacity:1;transform:none}
 
-/* ===================== TEXTO JUSTIFICADO E EQUILIBRADO ===================== */
 .texto-justificado {
-  /* Mantém a justificação */
-  text-align: justify;
-  text-justify: inter-word; /* Ajuda a distribuir o espaço apenas entre as palavras */
-  
-  /* Reativa a hifenização automática para preencher os buracos */
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  
-  /* Mantém os limites inteligentes que você já tinha definido para não quebrar demais */
-  hyphenate-limit-chars: auto 5; /* Evita quebrar palavras muito curtas */
-  hyphenate-limit-lines: 2; /* Evita muitas linhas consecutivas terminando em hífen */
-  
-  text-wrap: wrap;
+  text-align: left;
+  hyphens: none;
+  -webkit-hyphens: none;
 }
-
-@media (max-width: 359px) {
-  /* Em telas *muito* estreitas, alinhamos à esquerda para evitar qualquer problema visual. */
-  .texto-justificado {
-    text-align: left;
-    hyphens: manual;
-  }
-}
-
 /* ===================== MÍDIA KIT / MARCAS ===================== */
 .kit-grade{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,68px);align-items:start}
 .kit-grade .lead + .lead{margin-top:var(--e5)}

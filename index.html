@@ -141,14 +141,22 @@ em{font-style:italic;color:var(--bronze)}
 .escuro h2,.escuro h3{color:var(--creme)}
 .escuro em{color:var(--ouro)}
 
-/* Seção Como Posso Ajuda (Conectada perfeitamente à Hero) */
+/* Seção Como Posso Ajudar (Com fundo alinhado e cor nude) */
+.secao-nude{
+  background-color: var(--creme-2);
+  background-image: 
+    linear-gradient(to bottom, rgba(239, 217, 202, 0.95) 0%, rgba(239, 217, 202, 0.4) 18%, transparent 100%), 
+    var(--fundo-hero);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+}
 
-
-#local {
+#local{
   background-color:var(--creme-2);
-  background-image:url('fundo-2.png');
+  background-image:url('padrao-local.jpg');
   background-repeat:no-repeat;
-  background-size:cover;     
+  background-size:cover;     /* motivo ampliado: não fecha em ladrilho */
   background-position:center;
 }
 

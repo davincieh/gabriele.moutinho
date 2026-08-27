@@ -334,25 +334,28 @@ em{font-style:italic;color:var(--bronze)}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--mola),transform .8s var(--mola)}
 .rv.on{opacity:1;transform:none}
 
-/* ===================== TEXTO JUSTIFICADO (SEM QUEBRAR PALAVRAS) ===================== */
+/* ===================== TEXTO JUSTIFICADO E EQUILIBRADO ===================== */
 .texto-justificado {
+  /* Mantém a justificação */
   text-align: justify;
   text-justify: inter-word; /* Ajuda a distribuir o espaço apenas entre as palavras */
   
-  /* Aqui está o segredo: desativa o corte das palavras */
-  hyphens: none;
-  -webkit-hyphens: none;
+  /* Reativa a hifenização automática para preencher os buracos */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  
+  /* Mantém os limites inteligentes que você já tinha definido para não quebrar demais */
+  hyphenate-limit-chars: auto 5; /* Evita quebrar palavras muito curtas */
+  hyphenate-limit-lines: 2; /* Evita muitas linhas consecutivas terminando em hífen */
   
   text-wrap: wrap;
 }
 
 @media (max-width: 359px) {
-  /* O seu código original já era muito inteligente aqui! 
-     Em telas muito finas, justificar sem quebrar gera buracos enormes. 
-     Por isso, ele volta para a esquerda. */
+  /* Em telas *muito* estreitas, alinhamos à esquerda para evitar qualquer problema visual. */
   .texto-justificado {
     text-align: left;
-    hyphens: none;
+    hyphens: manual;
   }
 }
 

@@ -334,24 +334,26 @@ em{font-style:italic;color:var(--bronze)}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--mola),transform .8s var(--mola)}
 .rv.on{opacity:1;transform:none}
 
-/* ===================== TEXTO JUSTIFICADO ===================== */
-.texto-justificado{
-  text-align:justify;
-  text-justify:inter-word;
-  /* hifenização mais solta: quebra palavras com mais frequência,
-     o que faz cada linha chegar mais perto da margem direita */
-  hyphens:auto;
-  -webkit-hyphens:auto;
-  hyphenate-limit-chars:5 2 2;
-  -webkit-hyphenate-limit-before:2;
-  -webkit-hyphenate-limit-after:2;
-  /* text-wrap:pretty foi removido: ele encurtava as linhas de propósito
-     para "emparelhar" a margem, o que abria o vão da direita */
-  text-wrap:wrap;
+/* ===================== TEXTO JUSTIFICADO (SEM QUEBRAR PALAVRAS) ===================== */
+.texto-justificado {
+  text-align: justify;
+  text-justify: inter-word; /* Ajuda a distribuir o espaço apenas entre as palavras */
+  
+  /* Aqui está o segredo: desativa o corte das palavras */
+  hyphens: none;
+  -webkit-hyphens: none;
+  
+  text-wrap: wrap;
 }
-@media (max-width:359px){
-  /* só em telas realmente estreitas a justificação abre buracos */
-  .texto-justificado{text-align:left;hyphens:manual}
+
+@media (max-width: 359px) {
+  /* O seu código original já era muito inteligente aqui! 
+     Em telas muito finas, justificar sem quebrar gera buracos enormes. 
+     Por isso, ele volta para a esquerda. */
+  .texto-justificado {
+    text-align: left;
+    hyphens: none;
+  }
 }
 
 /* ===================== MÍDIA KIT / MARCAS ===================== */

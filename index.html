@@ -142,14 +142,25 @@ em{font-style:italic;color:var(--bronze)}
 .escuro em{color:var(--ouro)}
 
 /* Seção Como Posso Ajudar (Com fundo alinhado, cor nude e transição suave) */
+/* 1. Fim da seção da Hero (transição suave na parte de baixo) */
+.hero {
+  position: relative;
+  /* ... seus outros estilos da hero ... */
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+/* 2. Seção Como Posso Ajudar (com o fundo-2.png fundindo suavemente no topo) */
 .secao-nude {
   background-color: var(--creme-2);
-  background-image: 
-    linear-gradient(to bottom, rgba(239, 217, 202, 0.95) 0%, rgba(239, 217, 202, 0.4) 18%, transparent 100%), 
-    url('fundo-2.png');
+  background-image: url('fundo-2.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
+  
+  /* Cria o fade suave na parte de cima para fundir com a seção anterior */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
 #local{

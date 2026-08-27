@@ -141,22 +141,33 @@ em{font-style:italic;color:var(--bronze)}
 .escuro h2,.escuro h3{color:var(--creme)}
 .escuro em{color:var(--ouro)}
 
-/* Seção Como Posso Ajudar (Conexão perfeita com a Hero usando a mesma estampa padrao.jpg) */
+/* Seção Como Posso Ajudar (Com fundo alinhado, cor nude e transição suave) */
+/* 1. Fim da seção da Hero (transição suave na parte de baixo) */
+.hero {
+  position: relative;
+  /* ... seus outros estilos da hero ... */
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+/* 2. Seção Como Posso Ajudar (com o fundo-2.png fundindo suavemente no topo) */
 .secao-nude {
   background-color: var(--creme-2);
-  background-image: 
-    linear-gradient(to bottom, rgba(239, 217, 202, 0.3) 0%, rgba(239, 217, 202, 0.05) 15%, transparent 35%), 
-    var(--fundo-hero);
+  background-image: url('fundo-2.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
+  
+  /* Máscara suave apenas para suavizar o topo e o rodapé da seção, sem deixar esbranquiçado */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
-#local {
+#local{
   background-color:var(--creme-2);
   background-image:url('padrao-local.jpg');
   background-repeat:no-repeat;
-  background-size:cover;     
+  background-size:cover;     /* motivo ampliado: não fecha em ladrilho */
   background-position:center;
 }
 
@@ -252,6 +263,7 @@ em{font-style:italic;color:var(--bronze)}
   color:var(--ouro);display:inline-flex;align-items:center;gap:var(--e2);min-height:44px;
   text-align:left;transition:color .2s;
 }
+/* Correção definitiva da seta apontando para baixo */
 .plano-mais::after{
   content:"";
   width:8px;
@@ -259,7 +271,7 @@ em{font-style:italic;color:var(--bronze)}
   border-right:2px solid currentColor;
   border-bottom:2px solid currentColor;
   transform:rotate(45deg);
-  margin-bottom: 4px;
+  margin-bottom: 4px; /* Ajuste para centralizar visualmente com o texto */
 }
 .plano-mais:hover{color:var(--ouro-claro)}
 .plano-tudo{list-style:none;margin:0;padding:0;display:grid;gap:var(--e3);font-size:1rem;color:#CDB5A3;line-height:1.55}
@@ -351,10 +363,13 @@ em{font-style:italic;color:var(--bronze)}
   text-align: left;
   hyphens: none;
 }
+/* Quando a tela for grande (PC) */
 @media (min-width: 881px) {
   .hero-texto {
     text-align: justify;
     text-justify: inter-word;
+    
+    /* Reativa os hifens apenas no computador para evitar os buracos */
     hyphens: auto;
     -webkit-hyphens: auto;
   }
@@ -375,6 +390,7 @@ em{font-style:italic;color:var(--bronze)}
 .ajuda svg{flex:none;margin-top:5px;color:var(--bronze)}
 .ajuda p{margin:0;font-size:1rem;line-height:1.55;color:var(--tinta)}
 
+/* os dois itens em destaque: filete em degradê, borda mais firme e texto em peso maior */
 .ajuda-destaque{
   position:relative;overflow:hidden;
   border-color:var(--bronze);
@@ -410,6 +426,8 @@ em{font-style:italic;color:var(--bronze)}
   .hero-acoes .btn{width:100%}
 }
 
+/* No celular a foto sangra de ponta a ponta: escapa do respiro lateral
+   do container e ocupa a largura inteira da tela. */
 @media (max-width:640px){
   .hero-foto{
     max-width:none;
@@ -417,6 +435,7 @@ em{font-style:italic;color:var(--bronze)}
     margin-inline:calc(50% - 50vw);
   }
   .hero-foto img{
+    /* esfumado mais aberto nas laterais, já que agora encostam na borda da tela */
     -webkit-mask-image:radial-gradient(62% 62% at 50% 50%, #000 50%, transparent 100%);
             mask-image:radial-gradient(62% 62% at 50% 50%, #000 50%, transparent 100%);
   }
@@ -841,7 +860,7 @@ em{font-style:italic;color:var(--bronze)}
         <ul>
           <li><a href="#ajuda">Como te ajudo</a></li>
           <li><a href="#planos">Planos e valores</a></li>
-          <li><a href="#local">Как chegar</a></li>
+          <li><a href="#local">Como chegar</a></li>
           <li><a href="#marcas">Para marcas</a></li>
           <li><a href="#faq">Dúvidas frequentes</a></li>
         </ul>
@@ -968,7 +987,7 @@ em{font-style:italic;color:var(--bronze)}
 
     var tipo  = a.getAttribute('data-conv');
     var plano = a.getAttribute('data-plano') || '';
-    $local = a.getAttribute('data-local') || '';
+    var local = a.getAttribute('data-local') || '';
     var valor = parseFloat(a.getAttribute('data-valor') || '0');
 
     if (tipo === 'whatsapp') {
@@ -1035,7 +1054,7 @@ em{font-style:italic;color:var(--bronze)}
   }
 
   document.querySelectorAll('.plano-mais').forEach(function(b){
-    b.addEventListener('click', function(){ abrir_plano(b); });
+    b.addEventListener('click', function(){ abrirPlano(b); });
   });
 
   var fecharModalBtn = document.getElementById('modal-fechar');

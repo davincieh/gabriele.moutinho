@@ -140,19 +140,24 @@ em{font-style:italic;color:var(--bronze)}
 .escuro{background:var(--cafe);color:var(--creme)}
 .escuro h2,.escuro h3{color:var(--creme)}
 .escuro em{color:var(--ouro)}
-.secao-nude{background:var(--creme-2)}
-  
-#local {
+
+/* Seção Como Posso Ajuda (Conectada perfeitamente à Hero) */
+.secao-nude {
   background-color: var(--creme-2);
   background-image: 
-    /* 1. Um degradê intermediário que pega a cor de transição exata das duas pontas */
-    linear-gradient(to bottom, rgba(239, 217, 202, 0.85) 0%, rgba(239, 217, 202, 0.2) 20%, transparent 100%),
-    /* 2. Sua imagem de fundo do local */
-    url('fundo-2.png');
+    linear-gradient(to bottom, rgba(254, 245, 236, 0.92) 0%, rgba(254, 245, 236, 0.3) 15%, transparent 100%),
+    var(--fundo-hero);
   background-repeat: no-repeat;
   background-size: cover;
-  /* IMPORTANTE: Força o topo da imagem de baixo a se alinhar exatamente com a borda superior */
-  background-position: center top; 
+  background-position: center top;
+}
+
+#local {
+  background-color:var(--creme-2);
+  background-image:url('fundo-2.png');
+  background-repeat:no-repeat;
+  background-size:cover;     
+  background-position:center;
 }
 
 .pular{position:absolute;left:-9999px;top:0;background:var(--bronze-700);color:var(--creme);padding:var(--e3) var(--e5);z-index:200;font-weight:600;border-radius:0 0 var(--r-card) 0}
@@ -549,7 +554,7 @@ em{font-style:italic;color:var(--bronze)}
 </section>
 
 <!-- ==================== COMO POSSO AJUDAR ==================== -->
-    <section class="secao secao-nude" id="ajuda" aria-labelledby="t-ajuda" style="background-image: url('fundo-2.png'); background-size: cover; background-position: center;">
+    <section class="secao secao-nude" id="ajuda" aria-labelledby="t-ajuda">
       <div class="container">
         <p class="eyebrow rv">Áreas de atendimento</p>
         <h2 id="t-ajuda" class="rv" style="max-width:18ch">Eu posso te ajudar a:</h2>
@@ -1003,7 +1008,7 @@ em{font-style:italic;color:var(--bronze)}
 
     if(mDur) mDur.textContent = dur ? dur.textContent.trim() : '';
     if(mTit) mTit.textContent = tit ? tit.textContent.trim() : '';
-    if(mPreco) mPreco.textContent = preco ? preco.textContent.replace(/\s+/g,' ').trim() : '';
+    if(mPreco) mPreco.textContent = preco ? preco.replace(/\s+/g,' ').trim() : '';
 
     if(mLista){
       mLista.innerHTML = '';

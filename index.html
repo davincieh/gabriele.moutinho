@@ -517,7 +517,7 @@ em{font-style:italic;color:var(--bronze)}
     text-align:center;
   }
 
-  /* Altera o botão "Agendar" do topo no computador e no mobile */
+ /* 1. Comportamento padrão para o botão "Agendar" do topo no Computador */
 header .nav > .btn {
   width: auto !important;
   max-width: none !important;
@@ -525,6 +525,17 @@ header .nav > .btn {
   padding: 8px 24px !important;
   font-size: 0.92rem !important;
   color: #FFFFFF !important;
+}
+/* 2. Quando a tela for menor (Mobile / Menu Aberto), ele volta ao tamanho padrão dos outros botões */
+@media (max-width: 900px) {
+  header .nav > .btn {
+    width: 100% !important;
+    max-width: 280px !important;
+    min-height: 50px !important;
+    padding: var(--e3) var(--e6) !important;
+    font-size: 1.05rem !important;
+    color: #FFFFFF !important; /* Mantém o texto em branco */
+  }
 }
   
   .nav-voltar{

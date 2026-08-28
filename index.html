@@ -176,6 +176,12 @@ em{font-style:italic;color:var(--bronze)}
   opacity: 0.4; /* Diminui a força geral da imagem */
   filter: blur(3px); /* Desfoca a textura para diminuir a definição */
 }
+  /* 3. Mantendo o comportamento original do Mobile */
+@media (max-width:880px){
+  .bloco-topo::before {
+    background-size: 230% auto, 100% 100%;
+  }
+}
   
 .bloco-topo > *{position:relative}
 

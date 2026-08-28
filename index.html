@@ -517,12 +517,15 @@ em{font-style:italic;color:var(--bronze)}
     text-align:center;
   }
 
-  .nav .btn{
-    width:100%;
-    max-width:280px;
-    min-height:50px;
-    font-size:1.05rem;
-  }
+  /* Altera SOMENTE o botão "Agendar" que fica dentro do menu de navegação do topo */
+.nav .btn {
+  width: auto !important;          /* Anula a largura de 100% dos outros botões */
+  max-width: none !important;      /* Remove o limite máximo de largura */
+  min-height: 40px !important;     /* Diminui a altura dele */
+  padding: 8px 24px !important;    /* Deixa o botão mais compacto nas laterais */
+  font-size: 0.92rem !important;   /* Letra um pouco mais proporcional */
+  color: #FFFFFF !important;       /* Muda a cor do texto para branco */
+}
 
   .nav-voltar{
     display:inline-flex !important;

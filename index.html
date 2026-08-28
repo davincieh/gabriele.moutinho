@@ -120,9 +120,22 @@ window.TRACK = {
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden; /* Trava estritamente qualquer vazamento horizontal no documento */
+}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-body{margin:0;background:var(--creme);color:var(--tinta);font-family:var(--corpo);font-size:var(--t-corpo);line-height:1.66;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-wrap:break-word}
+body{
+  margin:0;
+  background:var(--creme);
+  color:var(--tinta);
+  font-family:var(--corpo);
+  font-size:var(--t-corpo);
+  line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden; /* Garante zero rolagem lateral no corpo */
+  overflow-wrap:break-word;
+}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 button{font:inherit}
@@ -141,9 +154,8 @@ em{font-style:italic;color:var(--bronze)}
 
 .bloco-topo{
   position:relative;
-  --corte:60%;                     /* preenchido por JS com a altura do hero */
+  --corte:60%;
   z-index:1;
-  /* A COR fica aqui, em força total — greige original do fundo-1 */
   background-color:#E7DFD9;
   background-image:linear-gradient(to bottom,
     #E7DFD9 calc(var(--corte) - 110px),
@@ -154,19 +166,14 @@ em{font-style:italic;color:var(--bronze)}
 .bloco-topo::before{
   content:"";
   position:absolute;
-  inset:-8px;              /* o desfoque abaixo borra as bordas; o inset
-                              negativo joga essa borda para fora da vista */
+  inset:-8px;
   pointer-events:none;
-  /* O DESENHO fica só aqui. A opacidade abaixo regula a força dele
-     SEM mexer nas cores — se ainda estiver forte, baixe para .25 */
   background-image:url('padrao.png');
   background-repeat:repeat-y;
   background-size:100% auto;
   background-position:center top;
   opacity:.34;
-  filter:blur(2px);        /* AQUI se regula o desfoque do desenho */
-  /* O desenho some antes de encontrar a seção escura, senão as flores
-     ficam cortadas ao meio numa linha reta. 160px = tamanho da dissolução. */
+  filter:blur(2px);
   -webkit-mask-image:linear-gradient(to bottom, #000 calc(100% - 160px), transparent 100%);
           mask-image:linear-gradient(to bottom, #000 calc(100% - 160px), transparent 100%);
 }
@@ -234,11 +241,6 @@ em{font-style:italic;color:var(--bronze)}
   width:100%; height:auto;
   aspect-ratio: 854/940;
   object-fit: contain;
-  /* centro deslocado para cima e raio vertical maior: a cabeça dela fica
-     dentro da área 100% opaca; quem dissolve é a base e as laterais */
-  /* Duas camadas: a radial cuida das laterais e deixa o TOPO 100% opaco
-     (a cabeça dela não pode dissolver); a linear faz o rodapé sumir no fundo.
-     'intersect' aplica as duas ao mesmo tempo. */
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, #000 8%),
     radial-gradient(72% 130% at 50% 32%, #000 74%, transparent 100%),
@@ -259,8 +261,7 @@ em{font-style:italic;color:var(--bronze)}
 }
 
 .hero-conteudo h1{font-size:clamp(2rem,1.5rem + 2vw,3.2rem);margin-bottom:var(--e4);color:var(--tinta)}
-.hero-destaque{font-family:var(--display);font-size:clamp(1.35rem,1.15rem + 1vw,1.85rem);line-height:1.25;color:#734A2C;margin-bottom:var(--e5);font-weight:400}  /* bronze levemente mais escuro que o --bronze-700: sobre o greige do hero,
-     o tom original ficava em 4,30 de contraste, abaixo do mínimo no celular */
+.hero-destaque{font-family:var(--display);font-size:clamp(1.35rem,1.15rem + 1vw,1.85rem);line-height:1.25;color:#734A2C;margin-bottom:var(--e5);font-weight:400}
 .hero-texto{font-size:var(--t-lead);color:var(--tinta-fraca);line-height:1.65;margin-bottom:var(--e6)}
 .hero-acoes{display:flex;flex-wrap:wrap;gap:var(--e4)}
 
@@ -430,8 +431,6 @@ em{font-style:italic;color:var(--bronze)}
   padding-block:0;
 }
 .ajuda svg{flex:none;margin-top:4px;color:var(--bronze-700)}
-/* entrelinha curta faz cada item ler como um bloco só — é daí que vem
-   o destaque, sem precisar de negrito */
 .ajuda p{margin:0;font-size:1.06rem;line-height:1.28;color:var(--tinta)}
 
 /* ===================== MÍDIA KIT / MARCAS ===================== */
@@ -457,10 +456,10 @@ em{font-style:italic;color:var(--bronze)}
 
 @media (max-width: 640px) {
   .hero-foto {
-    max-width: none;
-    width: 100vw;
-    margin-inline: calc(50% - 50vw);
-    margin-top: -70px; 
+    max-width: 320px; /* Limitado de forma segura para não estourar a tela no mobile */
+    width: 100%;
+    margin-inline: auto; /* Centralizado perfeitamente sem margens negativas que geram scroll lateral */
+    margin-top: -30px; 
   }
 
   .hero-foto img {
@@ -477,7 +476,6 @@ em{font-style:italic;color:var(--bronze)}
   }
   .hero{padding-block:58px var(--secao)}
   .hero-in{gap:var(--e3)}
-  .hero-foto{margin-top:calc(var(--e5) * -1)}
 }
 
 @media (max-width:900px){
@@ -801,8 +799,8 @@ header.fixo .nav > .btn {
 <section class="secao secao-nude" id="local" aria-labelledby="t-local">
   <div class="container local-grade">
     <div>
-     
-      <p class="eyebrow rv">Local de atendimento</p>
+      <p class="eyebrow rv">Onde estou</p>
+      <h2 id="t-local" class="rv" style="margin-bottom:var(--e6)">Local de Atendimento</h2>
       <ul class="endereco rv">
         <li><strong>Rua Sérgio Buarque de Holanda, 605</strong></li>
         <li>Bloco Europe · Sala 824</li>

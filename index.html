@@ -155,6 +155,15 @@ em{font-style:italic;color:var(--bronze)}
   position:relative;
   --corte:60%;                     /* valor de segurança até o JS medir */
   background-color:#D3CAC1;
+  z-index: 1; /* Garante que o texto fique sempre por cima */
+}
+  /* 2. O pseudo-elemento carrega o fundo e aplica os efeitos de suavização */
+.bloco-topo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* Joga a imagem para trás do conteúdo */
+  
   background-image:
     url('padrao.png'),
     linear-gradient(to bottom,
@@ -163,7 +172,12 @@ em{font-style:italic;color:var(--bronze)}
   background-repeat:repeat-y, no-repeat;
   background-size:100% auto, 100% 100%;
   background-position:center top, center top;
+  
+  /* AQUI ACONTECE A MÁGICA: */
+  opacity: 0.4; /* Diminui a força geral da imagem */
+  filter: blur(3px); /* Desfoca a textura para diminuir a definição */
 }
+  
 .bloco-topo > *{position:relative}
 
 /* as seções NÃO podem ter fundo próprio */

@@ -154,7 +154,7 @@ em{font-style:italic;color:var(--bronze)}
 .bloco-topo{
   position:relative;
   --corte:60%;                     /* valor de segurança até o JS medir */
-  background-color:#E5D4C5; 
+  background-color:#E8E8E8; 
   z-index: 1; /* Garante que o texto fique sempre por cima */
 }
   /* 2. O pseudo-elemento carrega o fundo e aplica os efeitos de suavização */
@@ -165,14 +165,14 @@ em{font-style:italic;color:var(--bronze)}
   background-image:
     url('padrao.png'),
     linear-gradient(to bottom,
-      #E5D4C5 calc(var(--corte) - 110px),
+      #E8E8E8 calc(var(--corte) - 110px),
       #EFD9CA var(--corte));
   background-repeat:repeat-y, no-repeat;
   background-size:100% auto, 100% 100%;
   background-position:center top, center top;
   
-  /* AQUI ACONTECE A MÁGICA: */
-  opacity: 0.4; /* Diminui a força geral da imagem */
+  
+  opacity: 0.3; /* Diminui a força geral da imagem */
   filter: blur(3px); /* Desfoca a textura para diminuir a definição */
 }
   /* 3. Mantendo o comportamento original do Mobile */

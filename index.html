@@ -83,16 +83,15 @@ window.TRACK = {
 
 <style>
 :root{
-  /* paleta oficial da marca */
-  --creme:#FEF5EC;        /* creme do padrão — fundo claro principal */
-  --creme-2:#EFD9CA;      /* nude claro — seções alternadas */
-  --nude:#D2C9C0;         /* greige do padrão */
-  --nude-forte:#BFB2A6;   /* divisores e bordas */
-  --bronze:#895C35;       /* marrom da paleta — ícones e destaques */
-  --bronze-700:#7A5030;   /* marrom de contraste — botões e texto pequeno */
-  --ouro:#C5986E;         /* caramelo — acento sobre fundo escuro */
+  --creme:#FEF5EC;        
+  --creme-2:#EFD9CA;      
+  --nude:#D2C9C0;         
+  --nude-forte:#BFB2A6;   
+  --bronze:#895C35;       
+  --bronze-700:#7A5030;   
+  --ouro:#C5986E;         
   --ouro-claro:#DDB68C;
-  --cafe:#4A3020;         /* marrom escuro — superfícies escuras */
+  --cafe:#4A3020;         
   --cafe-2:#5E3E28;
   --tinta:#3A2617; --tinta-fraca:#665141;
 
@@ -118,7 +117,6 @@ window.TRACK = {
   --linha-clara:1px solid rgba(250,238,228,.18);
   --sombra:0 20px 50px -26px rgba(42,22,16,.42);
   --mola:cubic-bezier(.2,.7,.3,1);
-
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -141,23 +139,12 @@ em{font-style:italic;color:var(--bronze)}
 .escuro h2,.escuro h3{color:var(--creme)}
 .escuro em{color:var(--ouro)}
 
-/* ============ BLOCO DO TOPO: hero + "como posso te ajudar" ============
-   O padrão e a cor ficam AMBOS no contêiner, em camadas:
-     camada 1 (topo) = padrao.png, repetido verticalmente
-     camada 2        = degradê de cor, greige -> nude
-   As seções ficam transparentes. Isso é obrigatório: se a seção tiver cor
-   de fundo própria, ela pinta POR CIMA do padrão e o desenho some.
-
-   O ponto exato da troca de cor vem da variável --corte, preenchida por
-   JavaScript com a altura real do hero. Assim a cor muda exatamente no
-   corte entre as duas seções, em qualquer tela. */
 .bloco-topo{
   position:relative;
-  --corte:60%;                     /* valor de segurança até o JS medir */
-  background-color:#DCDCDC; 
-  z-index: 1; /* Garante que o texto fique sempre por cima */
+  --corte:60%;                     
+  background-color:#DCDCDC;  
+  z-index: 1; 
 }
-  /* 2. O pseudo-elemento carrega o fundo e aplica os efeitos de suavização */
 .bloco-topo::before {
   content: "";
   position: absolute;
@@ -170,25 +157,19 @@ em{font-style:italic;color:var(--bronze)}
   background-repeat:repeat-y, no-repeat;
   background-size:100% auto, 100% 100%;
   background-position:center top, center top;
-  
-  
-  opacity: 0.3; /* Diminui a força geral da imagem */
-  filter: blur(3px); /* Desfoca a textura para diminuir a definição */
+  opacity: 0.3; 
+  filter: blur(3px); 
 }
-  /* 3. Mantendo o comportamento original do Mobile */
 @media (max-width:880px){
   .bloco-topo::before {
     background-size: 230% auto, 100% 100%;
   }
 }
-  
 .bloco-topo > *{position:relative}
 
-/* as seções NÃO podem ter fundo próprio */
 .bloco-topo .hero,
 .bloco-topo #ajuda{background:none}
 
-/* CELULAR EM PRIMEIRO LUGAR: em tela estreita o motivo ficaria miúdo */
 @media (max-width:880px){
   .bloco-topo{background-size:230% auto, 100% 100%}
 }
@@ -196,7 +177,7 @@ em{font-style:italic;color:var(--bronze)}
   background-color:var(--creme-2);
   background-image:url('padrao-local.jpg');
   background-repeat:no-repeat;
-  background-size:cover;     /* motivo ampliado: não fecha em ladrilho */
+  background-size:cover;     
   background-position:center;
 }
 
@@ -292,7 +273,6 @@ em{font-style:italic;color:var(--bronze)}
   color:var(--ouro);display:inline-flex;align-items:center;gap:var(--e2);min-height:44px;
   text-align:left;transition:color .2s;
 }
-/* Correção definitiva da seta apontando para baixo */
 .plano-mais::after{
   content:"";
   width:8px;
@@ -300,7 +280,7 @@ em{font-style:italic;color:var(--bronze)}
   border-right:2px solid currentColor;
   border-bottom:2px solid currentColor;
   transform:rotate(45deg);
-  margin-bottom: 4px; /* Ajuste para centralizar visualmente com o texto */
+  margin-bottom: 4px; 
 }
 .plano-mais:hover{color:var(--ouro-claro)}
 .plano-tudo{list-style:none;margin:0;padding:0;display:grid;gap:var(--e3);font-size:1rem;color:#CDB5A3;line-height:1.55}
@@ -405,13 +385,10 @@ em{font-style:italic;color:var(--bronze)}
   text-align: left;
   hyphens: none;
 }
-/* Quando a tela for grande (PC) */
 @media (min-width: 881px) {
   .hero-texto {
     text-align: justify;
     text-justify: inter-word;
-    
-    /* Reativa os hifens apenas no computador para evitar os buracos */
     hyphens: auto;
     -webkit-hyphens: auto;
   }
@@ -423,11 +400,10 @@ em{font-style:italic;color:var(--bronze)}
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px var(--e5); /* Espaçamento vertical reduzido */
+  gap: 12px var(--e5); 
 }
 @media (max-width:760px){.ajuda{grid-template-columns:1fr;gap:var(--e5);margin-top:var(--e7)}}
 
-/* sem balão: só o sinal de conferido e o texto, direto sobre o fundo */
 .ajuda li{
   display:flex;gap:var(--e4);align-items:flex-start;
   padding-block:var(--e2);
@@ -456,18 +432,15 @@ em{font-style:italic;color:var(--bronze)}
   .hero-acoes .btn{width:100%}
 }
 
-/* No celular a foto sangra de ponta a ponta: escapa do respiro lateral
-   do container e ocupa a largura inteira da tela. */
 @media (max-width: 640px) {
   .hero-foto {
     max-width: none;
     width: 100vw;
     margin-inline: calc(50% - 50vw);
-    margin-top: -70px; /* Puxa ainda mais para cima no mobile */
+    margin-top: -70px; 
   }
 
   .hero-foto img {
-    /* esfumado mais aberto nas laterais, já que agora encostam na borda da tela */
    -webkit-mask-image: radial-gradient(62% 55% at 50% 52%, #000 50%, transparent 100%);
             mask-image: radial-gradient(62% 55% at 50% 52%, #000 50%, transparent 100%);
   }
@@ -517,18 +490,6 @@ em{font-style:italic;color:var(--bronze)}
     text-align:center;
   }
 
- /* 1. Botão "Agendar" do topo no Computador (estado normal e quando a barra fica fixa ao rolar) */
-header .nav > .btn,
-header.fixo .nav > .btn {
-  width: auto !important;
-  max-width: none !important;
-  min-height: 40px !important;
-  padding: 8px 24px !important;
-  font-size: 0.92rem !important;
-  color: #FFFFFF !important;
-}
-/* 2. Quando a tela for menor (Mobile / Menu Aberto), ele volta ao tamanho padrão dos outros botões */
-@media (max-width: 900px) {
   header .nav > .btn,
   header.fixo .nav > .btn {
     width: 100% !important;
@@ -538,7 +499,7 @@ header.fixo .nav > .btn {
     font-size: 1.05rem !important;
     color: #FFFFFF !important;
   }
-}  
+
   .nav-voltar{
     display:inline-flex !important;
     align-items:center;
@@ -554,6 +515,16 @@ header.fixo .nav > .btn {
     cursor:pointer;
     margin-bottom:12px;
   }
+}
+
+header .nav > .btn,
+header.fixo .nav > .btn {
+  width: auto !important;
+  max-width: none !important;
+  min-height: 40px !important;
+  padding: 8px 24px !important;
+  font-size: 0.92rem !important;
+  color: #FFFFFF !important;
 }
 </style>
 </head>
@@ -622,10 +593,10 @@ header.fixo .nav > .btn {
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Ganhar massa muscular e melhorar sua composição corporal</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Reduzir gordura corporal de forma estratégica</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Melhorar seus resultados e sua performance nos treinos de musculação</p></li>
-        <li class="ajuda-destaque rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Melhorar sua performance em esportes de endurance, como corrida e ciclismo</p></li>
+        <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Melhorar sua performance em esportes de endurance, como corrida e ciclismo</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Organizar sua alimentação de acordo com a sua rotina</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Melhorar sua relação com a comida e desenvolver hábitos sustentáveis</p></li>
-        <li class="ajuda-destaque rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Adequar sua alimentação durante o uso de canetas emagrecedoras</p></li>
+        <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Adequar sua alimentação durante o uso de canetas emagrecedoras</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Estruturar uma estratégia nutricional para preservar e favorecer o ganho de massa muscular, mesmo durante o uso do medicamento</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Garantir uma ingestão adequada de proteínas, fibras, vitaminas e minerais durante o tratamento</p></li>
         <li class="rv"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>Adaptar refeições caso surjam desconfortos gastrointestinais durante o uso das canetas</p></li>
@@ -955,7 +926,6 @@ header.fixo .nav > .btn {
 (function(){
   "use strict";
 
-  /* ---------- ponto exato da troca de cor no bloco do topo ---------- */
   (function(){
     var bloco = document.querySelector('.bloco-topo');
     var hero  = bloco && bloco.querySelector('.hero');
@@ -968,7 +938,6 @@ header.fixo .nav > .btn {
     window.addEventListener('load', medir);
     if('ResizeObserver' in window) new ResizeObserver(medir).observe(hero);
   })();
-
 
   var topo = document.getElementById('topo');
   function s(){ if(topo) topo.classList.toggle('fixo', window.scrollY > 40); }

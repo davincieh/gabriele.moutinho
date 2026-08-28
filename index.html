@@ -142,48 +142,52 @@ em{font-style:italic;color:var(--bronze)}
 .escuro em{color:var(--ouro)}
 
 /* ============ BLOCO DO TOPO: hero + "como posso te ajudar" ============
-   As duas seções ficam dentro de um mesmo contêiner. O padrão geométrico é
-   UMA camada só, ladrilhada por cima das duas — por isso o desenho continua
-   sem quebra na passagem de uma para a outra.
-   A troca de cor é feita por um degradê no contêiner, não por máscara:
-   máscara apagaria também o texto e deixava aquele borrão esbranquiçado. */
-.bloco-topo{
-  position:relative;
-  background-image:linear-gradient(
-    to bottom,
-    var(--nude)    0%,     /* greige do hero */
-    var(--nude)    34%,
-    var(--creme-2) 62%,    /* nude rosado da seção de baixo */
-    var(--creme-2) 100%
-  );
-}
-.bloco-topo::before{
-  content:"";
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:url('padrao-fundo.png');
-  background-repeat:repeat;
-  background-size:326px auto;     /* 383px do ladrilho x 0,85 — mesma escala nas duas seções */
-  background-position:center top;
-}
-.bloco-topo > *{position:relative;z-index:1}
-@media (max-width:760px){.bloco-topo::before{background-size:223px auto}}
+   Cada seção usa a arte original correspondente, em 'cover'.
+   As duas imagens são 16:9 e NÃO fecham como ladrilho — por isso não são
+   repetidas: repetir era o que produzia os cortes no desenho.
+   A junção é resolvida por um degradê que leva as duas ao mesmo tom liso
+   (#EEE0D5). No ponto de encontro não há desenho, então não há emenda. */
+.bloco-topo{position:relative;background-color:var(--creme-2)}
+.bloco-topo > *{position:relative}
 
-/* as duas seções ficam transparentes: quem pinta é o contêiner */
-.bloco-topo .hero,
-.bloco-topo #ajuda{background:none}
-
-/* Véu claro atrás do texto do hero.
-   QUANTO MENOR O ÚLTIMO NÚMERO, MAIS ESCURO FICA O FUNDO.
-   Não desça abaixo de .15 — aí o parágrafo perde contraste. */
 .bloco-topo .hero{
-  background-image:linear-gradient(105deg,
-    rgba(254,245,236,.55) 0%,
-    rgba(254,245,236,.35) 46%,
-    rgba(254,245,236,.12) 100%);
+  background-color:#D3CAC1;
+  background-image:
+    /* 1. véu claro atrás do texto — MENOR = MAIS ESCURO (não desça de .15) */
+    linear-gradient(105deg,
+      rgba(254,245,236,.55) 0%,
+      rgba(254,245,236,.35) 46%,
+      rgba(254,245,236,.12) 100%),
+    /* 2. dissolve o desenho no tom liso antes da próxima seção */
+    linear-gradient(to bottom,
+      rgba(238,224,213,0) 68%,
+      rgba(238,224,213,1) 100%),
+    /* 3. a arte original */
+    url('fundo-hero.jpg');
+  background-size:cover, 100% 100%, cover;
+  background-position:center, center, center;
+  background-repeat:no-repeat;
 }
+
+.bloco-topo #ajuda{
+  background-color:#EEE0D5;
+  background-image:
+    /* nasce do mesmo tom liso e revela o desenho aos poucos */
+    linear-gradient(to bottom,
+      rgba(238,224,213,1) 0%,
+      rgba(238,224,213,0) 26%),
+    url('fundo-ajuda.jpg');
+  background-size:100% 100%, cover;
+  background-position:center, center;
+  background-repeat:no-repeat;
+}
+
 @media (max-width:880px){
   .bloco-topo .hero{
-    background-image:linear-gradient(rgba(254,245,236,.25), rgba(254,245,236,.45));
+    background-image:
+      linear-gradient(rgba(254,245,236,.25), rgba(254,245,236,.45)),
+      linear-gradient(to bottom, rgba(238,224,213,0) 72%, rgba(238,224,213,1) 100%),
+      url('fundo-hero.jpg');
   }
 }
 

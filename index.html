@@ -243,11 +243,11 @@ em{font-style:italic;color:var(--bronze)}
 .hero-in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:center}
 .hero-foto{position:relative;margin:-40px auto 0;max-width:430px;width:100%}
 .hero-foto img{
-  width:100%;height:auto;
-  aspect-ratio:854/940;
-  object-fit:contain;
-  -webkit-mask-image:radial-gradient(66% 64% at 50% 50%, #000 55%, transparent 100%);
-          mask-image:radial-gradient(66% 64% at 50% 50%, #000 55%, transparent 100%);
+  width:100%; height:auto;
+  aspect-ratio: 854/940;
+  object-fit: contain;
+  -webkit-mask-image:radial-gradient(66% 50% at 50% 55%, #000 55%, transparent 100%);
+          mask-image:radial-gradient(66% 50% at 50% 55%, #000 55%, transparent 100%);
 }
 
 .hero-conteudo{
@@ -468,8 +468,8 @@ em{font-style:italic;color:var(--bronze)}
 
   .hero-foto img {
     /* esfumado mais aberto nas laterais, já que agora encostam na borda da tela */
-    -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000 50%, transparent 100%);
-            mask-image: radial-gradient(62% 62% at 50% 50%, #000 50%, transparent 100%);
+    -webkit-mask-image: radial-gradient(62% 50% at 50% 55%, #000 50%, transparent 100%);
+            mask-image: radial-gradient(62% 50% at 50% 55%, #000 50%, transparent 100%);
   }
   .hero{padding-block:58px var(--secao)}
   .hero-in{gap:var(--e3)}
